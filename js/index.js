@@ -29,7 +29,7 @@ loginFormInputs.forEach((element) => {
   });
 });
 
-let usersDataBase = JSON.parse(localStorage.getItem("userDataBase")) || [];
+let usersDataBase = JSON.parse(localStorage.getItem("usersDataBase")) || [];
 
 // handle signup button
 signUpBtn.addEventListener("click", (event) => {
@@ -44,6 +44,11 @@ signUpBtn.addEventListener("click", (event) => {
     addNewUser();
     overlayAlert.textContent = "success";
     signUpAlert.textContent = "success";
+    setTimeout(() => {
+      overlayAlert.textContent =
+        "please signup using your name, account and password";
+      signUpAlert.textContent = "";
+    }, 1000);
   } else {
     // handeling error messages on signup
     let errorFields = [...signUpForm.querySelectorAll(".wrong-input")];
@@ -62,28 +67,22 @@ signUpBtn.addEventListener("click", (event) => {
       }
     });
     overlayAlert.textContent =
-      errorMsgs || "please signup using your name, account and password";
+      errorMsgs || "one or more inputs are empty";
     signUpAlert.textContent =
-      errorFields.length > 0 && "one or more inputs are invalid";
+      errorFields.length > 0 ? "one or more inputs are invalid" : "one or more inputs are empty";
   }
 });
 
 // function to add new users to the usersDataBase
 let addNewUser = () => {
-  if (
-    signUpForm.children[1].children[1].value != "" &&
-    signUpForm.children[2].children[1].value != "" &&
-    signUpForm.children[3].children[1].value != ""
-  ) {
     let newUser = {
-      name: signUpForm.children[1].children[1].value,
-      email: signUpForm.children[2].children[1].value,
-      password: signUpForm.children[3].children[1].value,
+      name: signUpFormInputs[0].value,
+      email: signUpFormInputs[1].value,
+      password: signUpFormInputs[2].value,
     };
     usersDataBase.push(newUser);
     cleanInputFields();
     addUserToLocalStorage();
-  }
 };
 
 // function to add usersDataBase to local storage
