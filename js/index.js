@@ -21,7 +21,7 @@ let LoggedUser = localStorage.getItem("LoggedUser");
 
 // if user is logged the open the home page
 if (LoggedUser) {
-  window.open("./pages/home.html");
+  window.open("./pages/home.html" , "_self");
 } else if (!LoggedUser) {
   // handel input validation in both forms
   signUpFormInputs.forEach((element) => {
@@ -53,7 +53,7 @@ if (LoggedUser) {
         ) {
           LoggedUser = user.name;
           localStorage.setItem("LoggedUser", LoggedUser);
-          window.open("./pages/home.html");
+          window.open("./pages/home.html", "_self");
         }
         // if user not found
         else {

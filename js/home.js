@@ -6,5 +6,5 @@ welcomeMessage.textContent = `welcome ${LoggedUser}`;
 
 logoutButton.addEventListener("click", () => {
     localStorage.removeItem("LoggedUser");
-    window.open("../index.html");
+    window.open("../index.html", "_self");
 });
