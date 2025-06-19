@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./css/style.css" />
+    <title>Login & Signup</title>
+  </head>
+  <body class="">
+    <section id="main-container" class="position-relative">
+      <div class="row h-100">
+        <div
+          class="col-md-6 form d-none d-md-flex justify-content-center align-items-center"
+          id="loginForm"
+        >
+          <form class="mt-4 mt-md-none card py-5 px-3 bg-white shadow-lg">
+            <h3 class="mb-4 fw-bold">Login</h3>
+            <div class="mb-3">
+              <label for="loginEmail" class="form-label fs-5"
+                >Email address</label
+              >
+              <input
+                type="email"
+                id="loginEmail"
+                class="form-control bg-body-secondary"
+                placeholder="name@example.com"
+                required
+              />
+            </div>
+            <div class="mb-3">
+              <label for="loginPassword" class="form-label fs-5"
+                >Password</label
+              >
+              <input
+                type="password"
+                id="loginPassword"
+                class="form-control bg-body-secondary"
+                placeholder=""
+                required
+              />
+            </div>
+            <button id="loginBtn" class="btn btn-primary text-capitalize mb-3">
+              Login
+            </button>
+
+            <p class="">
+              Don’t have an account?
+              <span
+                class="text-primary text-decoration-underline switchFormBtns"
+                >sign up</span
+              >
+            </p>
+            <p
+              id="loginAlert"
+              class="m-0 mobile-alert text-center d-md-none fw-bold"
+            >
+              email or password is wrong
+            </p>
+          </form>
+        </div>
+        <div
+          class="col-md-6 form d-flex d-md-flex justify-content-center align-items-center"
+          id="signUpForm"
+        >
+          <form class="card my-4 mt-md-none py-5 px-3 bg-white shadow-lg">
+            <h3 class="mb-4 fw-bold">Signup</h3>
+            <div class="mb-3">
+              <label for="signUpName" class="form-label fs-5">Name</label>
+              <input
+                type="text"
+                id="signUpName"
+                class="form-control bg-body-secondary"
+                placeholder="enter your name"
+                aria-required="true"
+                required
+              />
+            </div>
+            <div class="mb-3">
+              <label for="signUpEmail" class="form-label fs-5"
+                >Email address</label
+              >
+              <input
+                type="email"
+                id="signUpEmail"
+                class="form-control bg-body-secondary"
+                placeholder="name@example.com"
+                required
+              />
+            </div>
+            <div class="mb-3">
+              <label for="signUpPassword" class="form-label fs-5"
+                >Password</label
+              >
+              <input
+                type="password"
+                id="signUpPassword"
+                class="form-control bg-body-secondary"
+                required
+              />
+            </div>
+            <button id="signUpBtn" class="btn btn-primary text-capitalize mb-3">
+              sign up
+            </button>
+            <p class="">
+              You have an account?
+              <span
+                class="text-primary text-decoration-underline switchFormBtns"
+                >login</span
+              >
+            </p>
+            <p
+              id="signUpAlert"
+              class="m-0 mobile-alert text-center d-md-none fw-bold"
+            >
+              Success
+            </p>
+          </form>
+        </div>
+      </div>
+      <div
+        class="whiteOverlay d-none d-md-block z-2 overflow-hidden bg-white position-absolute top-0 start-0 p-4"
+      >
+        <h1 class="title m-0">Smart Login system</h1>
+        <div
+          class="info-container h-100 d-flex justify-content-center align-items-center"
+        >
+          <p class="info m-0 fw-bold">
+            please signup using your name, account and password
+          </p>
+        </div>
+      </div>
+    </section>
+    <script src="./js/bootstrap.bundle.min.js"></script>
+    <script src="./js/index.js"></script>
+  </body>
+</html>

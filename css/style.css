@@ -1,0 +1,55 @@
+:root {
+  --primary-color: #000;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  overflow-x: hidden;
+  font-family: "Poppins", sans-serif;
+}
+#main-container {
+  height: 100dvh;
+  overflow: hidden;
+  background-image: url("../assets/images/2439158-ezgif.com-webp-to-jpg-converter.jpg");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  .form {
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(3px);
+    visibility: visible;
+    transition: all 0.3s ease-in-out;
+
+    .card {
+      width: 400px;
+    }
+    span.text-decoration-underline {
+      cursor: pointer;
+    }
+  }
+}
+
+.whiteOverlay {
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  transform: translateX(0%);
+  transition: all 0.3s ease-in-out;
+}
+.whiteOverlayAnimtation {
+  transform: translateX(100%);
+}
+.success-input,
+.success-input:focus {
+  box-shadow: 0 0 0 0.25rem rgba(13, 253, 21, 0.25);
+  border: hsl(120, 100%, 25%);
+}
+.wrong-input,
+.wrong-input:focus {
+  box-shadow: 0 0 0 0.25rem rgba(253, 13, 13, 0.25);
+  border: hsl(0, 100%, 25%);
+}
