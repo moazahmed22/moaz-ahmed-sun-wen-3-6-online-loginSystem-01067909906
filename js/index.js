@@ -16,73 +16,126 @@ let alertMessages = {
   login: "email or password is not correct",
 };
 
-// handel input validation in both forms
-signUpFormInputs.forEach((element) => {
-  element.addEventListener("input", (event) => {
-    signUpValidation(event.target);
-  });
-});
-
-loginFormInputs.forEach((element) => {
-  element.addEventListener("input", (event) => {
-    signUpValidation(event.target);
-  });
-});
-
 let usersDataBase = JSON.parse(localStorage.getItem("usersDataBase")) || [];
+let LoggedUser = localStorage.getItem("LoggedUser");
 
-// handle signup button
-signUpBtn.addEventListener("click", (event) => {
-  event.preventDefault();
-  // validate inputs before sign up
-  if (
-    signUpFormInputs.every((element) => element.value !== "") &&
-    signUpFormInputs.every((element) =>
-      element.classList.contains("success-input")
-    )
-  ) {
-    addNewUser();
-    overlayAlert.textContent = "success";
-    signUpAlert.textContent = "success";
-    setTimeout(() => {
-      overlayAlert.textContent =
-        "please signup using your name, account and password";
-      signUpAlert.textContent = "";
-    }, 1000);
-  } else {
-    // handeling error messages on signup
-    let errorFields = [...signUpForm.querySelectorAll(".wrong-input")];
-    let errorMsgs = "";
-    errorFields.forEach((element) => {
-      switch (element.id) {
-        case "signUpName":
-          errorMsgs += `${alertMessages.name}, `;
-          break;
-        case "signUpEmail":
-          errorMsgs += `${alertMessages.email}, `;
-          break;
-        case "signUpPassword":
-          errorMsgs += `${alertMessages.password}, `;
-          break;
-      }
+// if user is logged the open the home page
+if (LoggedUser) {
+  window.open("./pages/home.html");
+} else if (!LoggedUser) {
+  // handel input validation in both forms
+  signUpFormInputs.forEach((element) => {
+    element.addEventListener("input", (event) => {
+      formValidation(event.target);
     });
-    overlayAlert.textContent =
-      errorMsgs || "one or more inputs are empty";
-    signUpAlert.textContent =
-      errorFields.length > 0 ? "one or more inputs are invalid" : "one or more inputs are empty";
-  }
-});
+  });
+  loginFormInputs.forEach((element) => {
+    element.addEventListener("input", (event) => {
+      formValidation(event.target);
+    });
+  });
+
+  // handel login button
+  loginBtn.addEventListener("click", (event) => {
+    event.preventDefault();
+    // evaluate inputs before the query
+    if (
+      loginFormInputs.every((element) => element.value !== "") &&
+      loginFormInputs.every((element) =>
+        element.classList.contains("success-input")
+      )
+    ) {
+      // query on usersDataBase to find a match
+      usersDataBase.forEach((user) => {
+        if (
+          user.email == loginFormInputs[0].value &&
+          user.password == loginFormInputs[1].value
+        ) {
+          LoggedUser = user.name;
+          localStorage.setItem("LoggedUser", LoggedUser);
+          window.open("./pages/home.html");
+        }
+        // if user not found
+        else {
+          overlayAlert.textContent = alertMessages.login;
+          loginAlert.textContent = alertMessages.login;
+        }
+      });
+    } else {
+      // handeling error messages on signup
+      let errorFields = [...loginForm.querySelectorAll(".wrong-input")];
+      let errorMsgs = "";
+      errorFields.forEach((element) => {
+        switch (element.id) {
+          case "loginEmail":
+            errorMsgs += `${alertMessages.email}, `;
+            break;
+          case "loginPassword":
+            errorMsgs += `${alertMessages.password}, `;
+            break;
+        }
+      });
+      overlayAlert.textContent = errorMsgs || "one or more inputs are empty";
+      loginAlert.textContent =
+        errorFields.length > 0
+          ? "one or more inputs are invalid"
+          : "one or more inputs are empty";
+    }
+  });
+  // handle signup button
+  signUpBtn.addEventListener("click", (event) => {
+    event.preventDefault();
+    // validate inputs before sign up
+    if (
+      signUpFormInputs.every((element) => element.value !== "") &&
+      signUpFormInputs.every((element) =>
+        element.classList.contains("success-input")
+      )
+    ) {
+      addNewUser();
+      overlayAlert.textContent = "success";
+      signUpAlert.textContent = "success";
+      setTimeout(() => {
+        overlayAlert.textContent =
+          "please signup using your name, account and password";
+        signUpAlert.textContent = "";
+      }, 1000);
+    } else {
+      // handeling error messages on signup
+      let errorFields = [...signUpForm.querySelectorAll(".wrong-input")];
+      let errorMsgs = "";
+      errorFields.forEach((element) => {
+        switch (element.id) {
+          case "signUpName":
+            errorMsgs += `${alertMessages.name}, `;
+            break;
+          case "signUpEmail":
+            errorMsgs += `${alertMessages.email}, `;
+            break;
+          case "signUpPassword":
+            errorMsgs += `${alertMessages.password}, `;
+            break;
+        }
+      });
+      overlayAlert.textContent = errorMsgs || "one or more inputs are empty";
+      signUpAlert.textContent =
+        errorFields.length > 0
+          ? "one or more inputs are invalid"
+          : "one or more inputs are empty";
+    }
+  });
+}
 
 // function to add new users to the usersDataBase
 let addNewUser = () => {
-    let newUser = {
-      name: signUpFormInputs[0].value,
-      email: signUpFormInputs[1].value,
-      password: signUpFormInputs[2].value,
-    };
-    usersDataBase.push(newUser);
-    cleanInputFields();
-    addUserToLocalStorage();
+  let newUser = {
+    name: signUpFormInputs[0].value,
+    email: signUpFormInputs[1].value,
+    password: signUpFormInputs[2].value,
+  };
+  usersDataBase.push(newUser);
+  cleanInputFields();
+  addUserToLocalStorage();
 };
 
 // function to add usersDataBase to local storage
@@ -111,10 +164,9 @@ switchFormBtns.forEach((element) => {
       : `please signup using your name, account and password`;
   });
 });
-
-// sign up form validation
+// validating both forms
 // validation styling on input
-let signUpValidation = (target) => {
+let formValidation = (target) => {
   let regex;
   switch (target.id) {
     case "signUpName":
